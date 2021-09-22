@@ -45,6 +45,9 @@ contract Exchange {
         revert();
     )
 
+
+
+
     function depositDai(address _Dai, uint _amount) public {
         require(_token != ETHER);
         require(Dai(_dai).transferFrom(msg.sender, address(this), _amount);
@@ -56,6 +59,19 @@ contract Exchange {
         // send tokens to contract 
         // emit event 
     }
+
+    function withdrawDai(address, _Dai, uint _amount) public {
+        require(_dai != address(0));
+        require(token[_dai][msg.sender] >= _amount);
+        tokens[_dai][msg.sender] = tokens[_dai][msg.sender].sub(_amount);
+        require(Token(_dai).transfer(msg.sender, _amount));
+        emit Withdraw(_dai, msg.sender, _amount, tokens[_dai][msg.sender];
+    }
+
+    function balanceOf(address _dai, address _user) public view returns (uint256) {
+        return tokens[_dai][_user];
+    }
+
 }
 
 

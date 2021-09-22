@@ -14,6 +14,8 @@ require('chai')
 
 contract('Exchange', ([deployer, feeAccount]) => {
 
+    const Exchange = artifacts.require('./Echange')
+    const dai = 0x6B175474E89094C44Da98b954EedeAC495271d0F
     let dai
     let Exchange
     const feePercent = (10)
@@ -85,6 +87,44 @@ contract('Exchange', ([deployer, feeAccount]) => {
             it('fails when no tokens are approved', async () => {
                 // didn't approve any tokends before depositing 
                 await exchange.depositDai(dai.address, dai(10), { from: user1 }).should.be.rejectedWith(EVM_REVERT)
+            })
+        })
+    })
+
+    describe('withdrawing Dai', async () => {
+        let result
+        let amount
+
+        describe('success', async () => {
+            beforeEach(async () => {
+
+                amount = dai(1)
+                await token.approve(exchange.address, amount, { from: user1 })
+                await exchange.depositDai({ dai, amount, from: user1 })
+
+                // withdraw tokens 
+                result = await exchange.withdrawDai(amount, { from: user1 })
+            })
+
+            it('withdraws Dai funds', async () => {
+                const balance = await exchange.tokens(dai, user1)
+                balance.toString().should.equal('0')
+            })
+
+            it('emits a "Withdraw" event', async () => {
+                const log = result.logs[0]
+                log.event.should.eq('Withdraw')
+                const event = log.arg
+                event.tokens.should.equal(dai)
+                event.user.should.equal(user1)
+                event.amount.toString().should.equal(amount.toString())
+                event.balance.toString().should.equal('0')
+            })
+        })
+
+        describe('failure', async () => {
+            it('rejects withdrawls for insufficient balances', async () => {
+                await exchange.withdrawDai(dai(100), { from: user1 }).should.be.rejectedWith(EVM_REVERT)
             })
         })
     })
