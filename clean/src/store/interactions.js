@@ -51,11 +51,11 @@ export const loadExchange = async (web3, networkId, dispatch) => {
     }
 }  
 
-export const deposit = async (callback, dispatch) => {
-    // fetch all price scans 
-    const depositDai = callback(send: )
-    console.log(depositDai)
-    // fetch all transfers
+// export const deposit = async (callback, dispatch) => {
+//     // fetch all price scans 
+//     const depositDai = callback(send: )
+//     console.log(depositDai)
+//     // fetch all transfers
 
     // fetch all tranascations 
-} 
+// } 

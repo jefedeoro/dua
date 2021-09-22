@@ -1,3 +1,5 @@
+yarn add truffle -g && yarn add ganache-cli -g && yarn run ganache-cli
+
 ## 📃 Instructions to run
 0. **Install dependencies in project directory(working with node v12.10.)**
 </br>```npm i```

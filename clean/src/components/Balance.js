@@ -1,13 +1,13 @@
 import React,  { Component } from 'redux'
 import {connect} from 'react-redux'
 
-class Balence extends Component {
+class Balance extends Component {
 
     render() {
         return (
             <div className="card bg-dark text-white">
                 <div className="card-header">
-                    Balance
+                    'Balance'
                 </div>
             </div>
         )
@@ -17,7 +17,7 @@ class Balence extends Component {
 function mapStateToProps(state) {
 
     return {
-
+     
     }
 }
 

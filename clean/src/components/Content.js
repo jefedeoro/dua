@@ -2,7 +2,7 @@ import React, { Component } from "react"
 import { connect } from 'react-redux'
 import { loadAllOrders } from '../store/interactions'
 import { exchangeSelector } from '../store/selectors'
-import  { Balance } from './Balance'
+// import  { Balance } from './Balance'
 
 class Content extends Component {
     componentWillMount() {
@@ -10,7 +10,7 @@ class Content extends Component {
     }
 
     async loadBloackChainData(dispatch) {
-        await loadAllOrders(this.props.exchange, dispatch)
+        // await loadAllOrders(this.props.exchange, dispatch)
     }
 
 
@@ -19,7 +19,7 @@ class Content extends Component {
             return (
                 <div className="content" >
                     <div className="vertical-split">
-                        <Balance/>
+                        balance
                         <div className="card bg-dark text-white">
                             <div className="card-header">
                                 Card Title
