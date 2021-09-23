@@ -16,10 +16,14 @@ pragma solidity ^0.5.0;
 import "openseppelin-solidity/contracts/math.SafeMath.sol";
 
 // Compound Interface
-import "./interfaces/compound/Comptroller.sol";
-import "./interfaces/compound/CErc20.sol";
-import "./interfaces/compound/CEther.sol";
-import "./interfaces/compound/Oracle.sol";
+import "./compound/Comptroller.sol";
+import "./compound/CErc20.sol";
+import "./compound/CEther.sol";
+import "./compound/Oracle.sol";
+// Aave interface
+import "./IAToken.sol";
+import "./IERC20.sol";
+import "./IScaledBalanceToken.sol";
 
 
 contract Exchange {
