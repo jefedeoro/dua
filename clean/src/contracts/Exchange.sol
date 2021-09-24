@@ -42,6 +42,24 @@ contract Exchange {
     address constant aDAI_address = 0x028171bCA77440897B824Ca71D1c56caC55b68A3;
     address constant UniswapV2_address = 0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D;
     
+    mapping(address => mapping(address => uint256 )) public tokens;
+    mapping(uint256 => _Order) public orders;
+
+    // events 
+    event 
+
+    struct _Order {
+        address _feeAccount, 
+        uint256 _feePercent, 
+        address dai, 
+        address cDai, 
+        address aDai, 
+        uint32 exchangeRateMantissa,
+        address comptroller_address,
+        address compToken,
+        address uniswapV2_address;
+    }
+
     // get compound rate fro cDai
     CErc20 cDai = CDai(0x5d3a536E4D6DbD6114cc1Ead35777bAB948E3643);
     uint exchangeRateMantissa = cDai.exchangeRateCurrent();
@@ -51,17 +69,8 @@ contract Exchange {
     // events 
     event Deposit(address dai, address user, uint256 amount, uint256 balance) async() => {
     
-        constructor (
-            address _feeAccount, 
-            uint256 _feePercent, 
-            address dai, 
-            address cDai, 
-            address aDai, 
-            uint32 exchangeRateMantissa,
-            address comptroller_address,
-            address compToken,
-            address uniswapV2_address
-            ) public {
+   
+            constructor (address _feeAccount, uint256 _feePercent) public {
             feeAccount = _feeAccount;
             feePercent = _feePercent;
             dai = _dai;
@@ -70,7 +79,7 @@ contract Exchange {
             exchangeRateMantissa = compRate;
             comptroller_address = Comptroller;
             compToken = COMP_address;
-            uniswapV2_address = uni;
+            uniswapV2_address = uni
         }
 
     // deposit Dai 

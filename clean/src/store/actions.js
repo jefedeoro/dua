@@ -12,9 +12,9 @@ export function web3AccountLoaded(account) {
     }
 }
 
-export function tokenLoaded(contract) {
+export function daiLoaded(contract) {
     return {
-        type: 'TOKEN_LOADED',
+        type: 'DAI_LOADED',
         contract
     }
 }
@@ -23,5 +23,46 @@ export function exchangeLoaded(contract) {
     return {
         type: 'EXCHANGE_LOADED',
         contract
+    }
+}
+
+export function daiBalanceLoaded(balance) {
+    return {
+        type: 'DAI_BALANCE_LOADED',
+        balance
+    }
+}
+
+export function aDaiRateLoaded(amount) {
+    return {
+        type: 'ADAI_RATE_LOADED',
+        amount
+    }
+}
+
+export function cDaiRateLoaded(amount) {
+    return {
+        type: 'CDAI_RATE_LOADED',
+        amount
+    }
+}
+
+
+export function exchangeDaiBalanceLoaded(balance) {
+    return {
+        type: 'EXCHANGE_DAI_BALANCE_LOADED',
+        balance
+    }
+}
+
+export function balancesLoaded() {
+    return {
+        type: 'BALANCES_LOADED'
+    }
+}
+
+export function balanceLoading() {
+    return {
+        type: 'BALANCES_LOADING'
     }
 }
