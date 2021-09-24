@@ -19,6 +19,7 @@
     "dotenv": "6.2.0",
     "ganache-cli": "^6.12.2",
     "glob-parent": "^6.0.1",
+    "global": "^4.4.0",
     "graphql": "^15.6.0",
     "jsondown": "^1.0.0",
     "moment": "2.29.1",
