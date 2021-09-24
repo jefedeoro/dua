@@ -24,19 +24,19 @@ function dai(state = {}, action) {
 function exchange(state = {}, action) {
     switch (action.type) {
         case 'EXCHANGE_LOADED':
-            return { ...state, loaded: true, contract: action.contract }
+            return { ...state, contract: action.contract: true }
         case 'DAI_BALANCE_LOADED':
-            return { ...state, loaded: true, contract: action.daiBalanceLoaded }
+            return { ...state, daiBalanceLoaded: action.balance }
         case 'ADAI_RATE_LOADED':
-            return { ...state, loaded: true, contract: action.aDaiRateLoaded }
+            return { ...state, aDaiRateLoaded: action.amount }
         case 'CDAI_RATE_LOADED':
-            return { ...state, loaded: true, contract: action.cDaiRateLoaded }
+            return { ...state, cDaiRateLoaded: action.amount }
         case 'EXCHANGE_DAI_BALANCE_LOADED':
-            return { ...state, loaded: true, contract: action.exchangeDaiBalanceLoaded }
+            return { ...state, exchangeDaiBalanceLoaded: true }
         case 'BALANCES_LOADED':
-            return { ...state, loaded: true, contract: action.balancesLoaded}
+            return { ...state, contract: action.balancesLoaded: true }
         case 'BALANCES_LOADING':
-            return {...state, loaded: true, contract: action.balancesLoaded}    
+            return {...state, contract: action.balancesLoaded: true }    
         default:
             return state
     }
