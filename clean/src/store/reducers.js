@@ -12,10 +12,18 @@ function web3(state = {}, action) {
     }
 }
 
-function dai(state = {}, action) {
+function token(state = {}, action) {
     switch (action.type) {
         case 'DAI_LOADED':
             return { ...state, loaded: true, contract: action.contract }
+        case 'DAI_BALANCE_LOADED':
+            return { ...state, daiBalanceLoaded: action.amount }
+        case 'ADAI_RATE_LOADED':
+            return { ...state, aDaiRateLoaded: action.amount }
+        case 'CDAI_RATE_LOADED':
+            return { ...state, cDaiRateLoaded: action.amount }
+        case 'EXCHANGE_DAI_BALANCE_LOADED':
+            return { ...state, exchangeDaiBalanceLoaded: action.amount }    
         default:
             return state
     }
@@ -24,19 +32,12 @@ function dai(state = {}, action) {
 function exchange(state = {}, action) {
     switch (action.type) {
         case 'EXCHANGE_LOADED':
-            return { ...state, contract: action.contract: true }
-        case 'DAI_BALANCE_LOADED':
-            return { ...state, daiBalanceLoaded: action.balance }
-        case 'ADAI_RATE_LOADED':
-            return { ...state, aDaiRateLoaded: action.amount }
-        case 'CDAI_RATE_LOADED':
-            return { ...state, cDaiRateLoaded: action.amount }
-        case 'EXCHANGE_DAI_BALANCE_LOADED':
-            return { ...state, exchangeDaiBalanceLoaded: true }
+            return { ...state, exchangeLoaded: true }
+
         case 'BALANCES_LOADED':
-            return { ...state, contract: action.balancesLoaded: true }
+            return { ...state, balancesLoaded: true }
         case 'BALANCES_LOADING':
-            return {...state, contract: action.balancesLoaded: true }    
+            return {...state, balancesLoaded: true }    
         default:
             return state
     }
@@ -45,7 +46,7 @@ function exchange(state = {}, action) {
 
 
 const rootReducer = combineReducers({
-    web3, dai, exchange
+    web3, token, exchange
 })
 
 export default rootReducer

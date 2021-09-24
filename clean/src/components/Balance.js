@@ -1,23 +1,24 @@
-import React  from 'redux'
-import {connect} from 'react-redux'
+import React from 'redux'
+import { connect } from 'react-redux'
 import { Component } from 'react'
 import { loadBalances } from '../store/interactions'
 import {
-    web3Selector, 
-    exchangeSelector, 
-    daiSelector, 
-    aDaiSelector, 
-    cDaiSelector, 
+    web3Selector,
+    exchangeSelector,
+    daiSelector,
+    aDaiSelector,
+    cDaiSelector,
     accountSelector
 } from '../store/selectors'
+import { balanceLoading, exchangeLoaded } from '../store/actions'
 
 class Balance extends Component {
     componentWillMount() {
         this.loadBlockchainData()
     }
 
-    async loadBlockchainData(props) {
-        const {dispatch, web3, exchange, dai, aDai, cDai, account}= props
+    async loadBlockchainData() {
+        const { dispatch, web3, exchange, dai, aDai, cDai, account } = this.props
         await loadBalances(dispatch, web3, exchange, dai, aDai, cDai, account)
     }
 
@@ -39,12 +40,20 @@ class Balance extends Component {
 function mapStateToProps(state) {
 
     return {
-     account: accountSelector(state),
-     exchange: exchangeSelector(state),
-     dai: daiSelector(state),
-     aDai: aDaiSelector(state),
-     cDai: cDaiSelector(state),
-     web3: web3Selector(state),
+        account: accountSelector(state),
+        exchange: exchangeSelector(state),
+        dai: daiSelector(state),
+        aDai: aDaiSelector(state),
+        cDai: cDaiSelector(state),
+        web3: web3Selector(state),
+        tokenLoaded: tokenLoadedSelector(state),
+        exchangeLoaded: exchangeLoadedSelector(state),
+        exchange: exchangeSelector(state),
+        dai: daiSelector(state),
+        aDai: aDaiSelector(state),
+        cDai: cDaiSelector(state),
+        balancesLoading: balanceLoadingSelector(state),
+        daiBalance: daiBalanceSelector(state),
     }
 }
 

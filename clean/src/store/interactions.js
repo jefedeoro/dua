@@ -1,5 +1,5 @@
 import Web3 from "web3"
-// import { DAI_ABI, DAI_address } from "../scripts/library"
+import { DAI_ABI, DAI_address } from "../scripts/library"
 import {
     web3Loaded,
     web3AccountLoaded,
@@ -32,9 +32,11 @@ export const loadAccount = async (web3, dispatch) => {
     }
 }
 
-export const loadToken = async (web3, networkId, dispatch) => {
+export const loadToken = async (web3, accounts, dispatch) => {
     try {
-        const dai = web3.eth.Contract(dai.abi, dai.network[networkId].address);
+        const DAI = new web3.eth.Contract(DAI_ABI, DAI_address);
+        const dai = new web3.utils.fromWei(await DAI.methods.balanceOf(accounts[0]).call())
+
         dispatch(daiLoaded(dai))
         return dai
     } catch (error) {
@@ -56,6 +58,7 @@ export const loadExchange = async (web3, networkId, dispatch) => {
 
 export const loadBalances = async (dispatch, web3, dai, exchange, account) => {
     // dai balance in wallet 
+    
     const daiBalance = await web3.methods.balanceOf(account).call()
     dispatch(daiBalanceLoaded(daiBalance))
 

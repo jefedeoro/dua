@@ -1,6 +1,17 @@
 import { get } from 'lodash'
 import { createSelector } from "reselect"
 
+
+export const formatBalance = (balance) => {
+    const precision = 100 // 2 decimal places
+  
+    balance = dai(balance)
+    balance = Math.round(balance * precision) / precision // Use 2 decimal places
+  
+    return balance
+}
+
+
 const account = state => get(state, 'web3.account')
 export const accountSelector = createSelector(account, a => a)
 
@@ -33,3 +44,11 @@ export const contractsLoadedSelector = createSelector(
 
 const balancesLoading = state => get(state, 'exchange.balancesLoading', true)
 export const balancesLoadingSelector = createSelector(balancesLoading, status => status)
+
+const daiBalance = state => get(state, 'token.balance', 0)
+export const daiBalanceSelector = createSelector(
+    daiBalance, 
+    (balance) => {
+        return formatBalance(balance)
+    }
+)
