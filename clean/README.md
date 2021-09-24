@@ -4,8 +4,14 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Available Scripts
 
-In the project directory, you can run:
+is scripts folder 
+## If you have truffle and ganache installed start with the following:
+`yarn && yarn run ganache-cli`
 
+## if you do not have truffle and ganache-cli installed start with the following: 
+`yarn && yarn add truffle && yarn add global ganache-cli && yarn run ganache-cli`
+
+## in a new terminal window type the following:
 ### `yarn start`
 
 Runs the app in the development mode.\

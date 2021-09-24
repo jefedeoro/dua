@@ -1,5 +1,6 @@
+
+import { DAI_ABI, DAI_address } from "../helpers"
 import Web3 from "web3"
-import { DAI_ABI, DAI_address } from "../scripts/library"
 import {
     web3Loaded,
     web3AccountLoaded,
@@ -11,6 +12,7 @@ import {
     exchangeDaiBalanceLoaded,
     balancesLoaded
 } from "./actions"
+
 
 
 export const loadWeb3 = async (dispatch) => {
@@ -31,6 +33,7 @@ export const loadAccount = async (web3, dispatch) => {
         return null
     }
 }
+
 
 export const loadToken = async (web3, accounts, dispatch) => {
     try {

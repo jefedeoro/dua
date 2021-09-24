@@ -1,6 +1,6 @@
 import React from 'redux'
 import { connect } from 'react-redux'
-import { Component } from 'react'
+import { Component, Spinner } from 'react'
 import { loadBalances } from '../store/interactions'
 import {
     web3Selector,
@@ -8,10 +8,16 @@ import {
     daiSelector,
     aDaiSelector,
     cDaiSelector,
-    accountSelector
+    accountSelector,   
+    tokenLoadedSelector,
+    exchangeLoadedSelector,
+    balancesLoadingSelector,
+    daiBalanceSelector
 } from '../store/selectors'
-import { balanceLoading, exchangeLoaded } from '../store/actions'
 
+const showForm = (props) => {
+
+}
 class Balance extends Component {
     componentWillMount() {
         this.loadBlockchainData()
@@ -31,6 +37,7 @@ class Balance extends Component {
                     Balance
                 </div>
                 <div className="card-body">
+                    {this.props.showForm ? showForm(this.props) : <Spinner />}
                 </div>
             </div>
         )
@@ -38,6 +45,7 @@ class Balance extends Component {
 }
 
 function mapStateToProps(state) {
+    const balancesLoading = balancesLoadingSelector(state)
 
     return {
         account: accountSelector(state),
@@ -52,8 +60,10 @@ function mapStateToProps(state) {
         dai: daiSelector(state),
         aDai: aDaiSelector(state),
         cDai: cDaiSelector(state),
-        balancesLoading: balanceLoadingSelector(state),
         daiBalance: daiBalanceSelector(state),
+        balancesLoading,
+        showForm: !balancesLoading
+        
     }
 }
 
