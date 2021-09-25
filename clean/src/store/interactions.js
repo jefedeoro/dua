@@ -38,7 +38,7 @@ export const loadAccount = async (web3, dispatch) => {
 export const loadToken = async (web3, accounts, dispatch) => {
     try {
         const DAI = new web3.eth.Contract(DAI_ABI, DAI_address);
-        const dai = new web3.utils.fromWei(await DAI.methods.balanceOf(accounts[0]).call())
+        const dai = new web3.utils.fromWei(await DAI.methods.amount(accounts[0]).call())
 
         dispatch(daiLoaded(dai))
         return dai
@@ -61,8 +61,8 @@ export const loadExchange = async (web3, networkId, dispatch) => {
 
 export const loadBalances = async (dispatch, web3, dai, exchange, account) => {
     // dai balance in wallet 
-    
-    const daiBalance = await web3.methods.balanceOf(account).call()
+
+    const daiBalance = await web3.methods.amount(account).call()
     dispatch(daiBalanceLoaded(daiBalance))
 
     // aDai rate 

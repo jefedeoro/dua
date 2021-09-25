@@ -1,6 +1,8 @@
 import React from 'redux'
+import ReactDOM from 'react-dom'
 import { connect } from 'react-redux'
 import { Component, Spinner } from 'react'
+import { Tabs, Tab } from 'react-bootstrap'
 import { loadBalances } from '../store/interactions'
 import {
     web3Selector,
@@ -16,6 +18,18 @@ import {
 } from '../store/selectors'
 
 const showForm = (props) => {
+    return(
+        <Tabs defaultActivityKey="deposit" className= "bg-dark text-white">
+
+            <Tab eventKey="deposit" title="deposit" className="bg-dark">
+
+            </Tab>
+
+            <Tab eventKey="withdraw" title="withdraw" className="bg-dark">
+
+            </Tab>
+        </Tabs>
+    )
 
 }
 class Balance extends Component {
@@ -30,7 +44,7 @@ class Balance extends Component {
 
 
 
-    render() {
+    render(Balance) {
         return (
             <div className="card bg-dark text-white">
                 <div className="card-header">
