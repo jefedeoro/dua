@@ -1,33 +1,128 @@
 import React from 'redux'
-import ReactDOM from 'react-dom'
+import Spinner from './Spinner'
 import { connect } from 'react-redux'
-import { Component, Spinner } from 'react'
+import { Component } from 'react'
 import { Tabs, Tab } from 'react-bootstrap'
-import { loadBalances } from '../store/interactions'
+import {
+    loadBalances,
+    daiDeposit,
+    daiWithdraw,
+} from '../store/interactions'
 import {
     web3Selector,
     exchangeSelector,
     daiSelector,
     aDaiSelector,
     cDaiSelector,
-    accountSelector,   
+    accountSelector,
     tokenLoadedSelector,
     exchangeLoadedSelector,
     balancesLoadingSelector,
-    daiBalanceSelector
+    daiBalanceSelector,
+    daiDepositAmountSelector,
+    daiWithdrawAmountSelector
 } from '../store/selectors'
+import {
+    daiDepositAmountChanged,
+    daiWithdrawAmountChanged
+} from '../store/actions'
+
 
 const showForm = (props) => {
-    return(
-        <Tabs defaultActivityKey="deposit" className= "bg-dark text-white">
+    const {
+        daiBalance,
+        exchangeDaiBalance,
+        dispatch,
+        daiDepositAmount,
+        exchange,
+        token,
+        account,
+        web3,
+        daiWithdrawAmount
+    } = props
+
+    return (
+        <Tabs defaultActivityKey="deposit" className="bg-dark text-white">
 
             <Tab eventKey="deposit" title="deposit" className="bg-dark">
+
+                <table className="table table-dark table-sm small">
+                    <thread>
+                        <tr>
+                            <tr>Token</tr>
+                            <tr>Wallet</tr>
+                            <tr>Swap</tr>
+                        </tr>
+                    </thread>
+                    <tbody>
+                        <tr>
+                            <td>DIA</td>
+                            <td>{daiBalance}</td>
+                            <td>{exchangeDaiBalance}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <form className="row" onSubmit={(event) => {
+                    event.preventDefault()
+                    daiDeposit(dispatch, exchange, web3, daiDepositAmount, account)
+                    console.log("form submitting...")
+                }}>
+                    <div className="col-12 col-sm pr-sm-2">
+                        <input
+                            type="text"
+                            placeholder="DAI Amount"
+                            onChange={(e) => dispatch(daiDepositAmountChanged(e.target.value))}
+                            className="form-control form-control-sm bg-dark text-white"
+                            required />
+                    </div>
+                </form>
 
             </Tab>
 
             <Tab eventKey="withdraw" title="withdraw" className="bg-dark">
 
+                <table className="table table-dark table-sm small">
+                    <thread>
+                        <tr>
+                            <tr>DIA</tr>
+                            <tr>Wallet</tr>
+                            <tr>In Use</tr>
+                        </tr>
+                    </thread>
+                </table>
+
+                <form className="row" onSubmit={(event) => {
+                    event.preventDefault()
+                    daiWithdraw(dispatch, exchange, web3, daiWithdrawAmount, account)
+                    console.log("form submitting...")
+                }}>
+                    <div className="col-12 col-sm pr-sm-2">
+                        <input
+                            type="text"
+                            placeholder="DAI Amount"
+                            onChange={(e) => dispatch(daiWithdrawAmountChanged(e.target.value))}
+                            className="form-control form-control-sm bg-dark text-white"
+                            required />
+                    </div>
+                </form>
+
+                <table>
+                    <tbody>
+                        <tr>
+                            <td>Dai</td>
+                            <td>{daiBalance}</td>
+                            <td>{exchangeDaiBalance}</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+
+
+
+
+
             </Tab>
+
         </Tabs>
     )
 
@@ -51,7 +146,7 @@ class Balance extends Component {
                     Balance
                 </div>
                 <div className="card-body">
-                    {this.props.showForm ? showForm(this.props) : <Spinner />}
+                    {/* {this.props.showForm ? showForm(this.props) : <Spinner />} */}
                 </div>
             </div>
         )
@@ -76,8 +171,10 @@ function mapStateToProps(state) {
         cDai: cDaiSelector(state),
         daiBalance: daiBalanceSelector(state),
         balancesLoading,
-        showForm: !balancesLoading
-        
+        showForm: !balancesLoading,
+        daiDepositAmount: daiDepositAmountSelector(state),
+        daiWithdrawAmount: daiWithdrawAmountSelector(state),
+
     }
 }
 

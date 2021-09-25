@@ -52,3 +52,9 @@ export const daiBalanceSelector = createSelector(
         return formatBalance(balance)
     }
 )
+
+const daiDepositAmount = state => get(state, 'exchange.daiDepositAmount', null)
+export const daiDepositAmountSelector = createSelector(daiDepositAmount, amount => amount)
+
+const daiWithdrawAmount = state => get(state, 'exchange.daiWithdrawAmount', null)
+export const daiWithdrawAmountSelector = createSelector(daiWithdrawAmount, amount => amount)

@@ -10,7 +10,8 @@ import {
     aDaiRateLoaded,
     cDaiRateLoaded,
     exchangeDaiBalanceLoaded,
-    balancesLoaded
+    balancesLoading,
+    balancesLoaded,
 } from "./actions"
 
 
@@ -82,13 +83,33 @@ export const loadBalances = async (dispatch, web3, dai, exchange, account) => {
 
 }
 
+export const subscribeToEvents = async (exchange, dispatch) => {
+    exchange.subscribeToEvents.depositDai({}, (error, event) => {
+        dispatch(balancesLoaded())
+    })
+    exchange.events.Withdraw({}, (error, event) => {
+        dispatch(balancesLoaded())
+    })
+}
 
+export const daiDeposit = (dispatch, exchange, web3, amount, account) => {
+    exchange.methods.daiDeposit.send({ from: account, value: web3.utils.toWei(amount, 'dai') })
+        .on('transactionHash', (hash) => {
+            dispatch(balancesLoading())
+        })
+        .on('error', (error) => {
+            console.error(error)
+            window.alert(`There was an error!`)
+        })
+}
 
-// export const deposit = async (callback, dispatch) => {
-//     // fetch all price scans 
-//     const depositDai = callback(send: )
-//     console.log(depositDai)
-//     // fetch all transfers
-
-    // fetch all tranascations 
-// } 
+export const daiWithdraw = (dispatch, exchange, web3, amount, account) => {
+    exchange.methods.daiWithdraw(web3.utils.toWei(amount, 'dai')).send({ from: account })
+        .on('transactionHash', (hash) => {
+            dispatch(balancesLoading())
+        })
+        .on('error', (error) => {
+            console.error(error)
+            window.alert(`There was an error!`)
+        })
+    }

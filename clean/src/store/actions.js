@@ -61,8 +61,32 @@ export function balancesLoaded() {
     }
 }
 
-export function balanceLoading() {
+export function balancesLoading() {
     return {
         type: 'BALANCES_LOADING'
+    }
+}
+
+export function daiDepositAmountChanged() {
+    return {
+        type: 'DAI_DEPOSIT_AMOUNT_CHANGED'
+    }
+}
+
+export function depositDai() {
+    return {
+        type: 'DEPOSIT_DAI'
+    }
+}
+
+export function daiWithdrawAmountChanged() {
+    return {
+        type: 'DAI_WITHDRAW_AMOUNT_CHANGED'
+    }
+}
+
+export function withdrawDai() {
+    return {
+        type: 'WITHDRAW_DAI'
     }
 }

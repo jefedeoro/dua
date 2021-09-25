@@ -11,6 +11,8 @@ is scripts folder
 ## if you do not have truffle and ganache-cli installed start with the following: 
 `yarn && yarn add truffle && yarn add global ganache-cli && yarn run ganache-cli`
 
+*// good time to get some coffee.*
+
 ## in a new terminal window type the following:
 ### `yarn start`
 

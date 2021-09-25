@@ -37,11 +37,19 @@ function exchange(state = {}, action) {
         case 'BALANCES_LOADED':
             return { ...state, balancesLoaded: true }
         case 'BALANCES_LOADING':
-            return {...state, balancesLoaded: true }    
+            return {...state, balancesLoaded: true }  
+        case 'DAI_DEPOSIT_AMOUNT_CHANGED':
+            return { ...state, daiDepositAmount: action.amount} 
+        case 'DAI_DEPOSIT':
+            return {...state, daiDeposit: action.amount}
+        case 'DAI_WITHDRAW':
+            return {...state, daiWithdraw: action.amount}
         default:
             return state
     }
 }
+
+
 
 
 
