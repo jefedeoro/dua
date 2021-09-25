@@ -16,6 +16,7 @@ import {
 
 
 
+
 export const loadWeb3 = async (dispatch) => {
     const web3 = new Web3(window.ethereum)
     dispatch(web3Loaded(web3))
@@ -92,8 +93,9 @@ export const subscribeToEvents = async (exchange, dispatch) => {
     })
 }
 
-export const daiDeposit = (dispatch, exchange, web3, amount, account) => {
-    exchange.methods.daiDeposit.send({ from: account, value: web3.utils.toWei(amount, 'dai') })
+export const daiDeposit = (dispatch, exchange, web3, token, amount, account) => {
+    amount = web3.utils.toWei(amount, 'dai')
+    token.methods.approve(exchange.options.address, amount).send({ from: account})
         .on('transactionHash', (hash) => {
             dispatch(balancesLoading())
         })
@@ -103,8 +105,8 @@ export const daiDeposit = (dispatch, exchange, web3, amount, account) => {
         })
 }
 
-export const daiWithdraw = (dispatch, exchange, web3, amount, account) => {
-    exchange.methods.daiWithdraw(web3.utils.toWei(amount, 'dai')).send({ from: account })
+export const daiWithdraw = (dispatch, exchange, dai, web3, amount, account) => {
+    exchange.methods.daiWithdraw(dai.options.address, web3.utils.toWei(amount, 'dai')).send({ from: account })
         .on('transactionHash', (hash) => {
             dispatch(balancesLoading())
         })

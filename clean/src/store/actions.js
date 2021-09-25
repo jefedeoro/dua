@@ -73,20 +73,9 @@ export function daiDepositAmountChanged() {
     }
 }
 
-export function depositDai() {
-    return {
-        type: 'DEPOSIT_DAI'
-    }
-}
-
 export function daiWithdrawAmountChanged() {
     return {
         type: 'DAI_WITHDRAW_AMOUNT_CHANGED'
     }
 }
 
-export function withdrawDai() {
-    return {
-        type: 'WITHDRAW_DAI'
-    }
-}

@@ -20,7 +20,7 @@ import {
     balancesLoadingSelector,
     daiBalanceSelector,
     daiDepositAmountSelector,
-    daiWithdrawAmountSelector
+    daiWithdrawAmountSelector,
 } from '../store/selectors'
 import {
     daiDepositAmountChanged,
@@ -35,7 +35,6 @@ const showForm = (props) => {
         dispatch,
         daiDepositAmount,
         exchange,
-        token,
         account,
         web3,
         daiWithdrawAmount
@@ -139,14 +138,14 @@ class Balance extends Component {
 
 
 
-    render(Balance) {
+    render() {
         return (
             <div className="card bg-dark text-white">
                 <div className="card-header">
                     Balance
                 </div>
                 <div className="card-body">
-                    {/* {this.props.showForm ? showForm(this.props) : <Spinner />} */}
+                    {this.props.showForm ? showForm(this.props) : <Spinner />}
                 </div>
             </div>
         )
@@ -165,10 +164,6 @@ function mapStateToProps(state) {
         web3: web3Selector(state),
         tokenLoaded: tokenLoadedSelector(state),
         exchangeLoaded: exchangeLoadedSelector(state),
-        exchange: exchangeSelector(state),
-        dai: daiSelector(state),
-        aDai: aDaiSelector(state),
-        cDai: cDaiSelector(state),
         daiBalance: daiBalanceSelector(state),
         balancesLoading,
         showForm: !balancesLoading,

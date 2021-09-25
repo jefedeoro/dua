@@ -2,13 +2,7 @@
 import './App.css'
 import React, { Component } from 'react'
 import { callback } from '../scripts/0_get_dai'
-import {
-  // DAI_ABI, 
-  // DAI_address,
-  // UniswapV2_ABI, 
-  // UniswapV2_address,
-  //DEADLINE
-} from '../scripts/library'
+
 import { loadWeb3, loadAccount, loadToken, loadExchange } from '../store/interactions'
 import { connect } from 'react-redux'
 import Navbar from './Navbar'
@@ -27,7 +21,7 @@ class App extends Component {
     const network = await web3.eth.net.getNetworkType()
     const networkId = await web3.eth.net.getId()
     const accounts = await loadAccount(web3, dispatch)
-    // const DAI = loadToken(web3, networkId, dispatch)
+    const DAI = loadToken(web3, networkId, dispatch)
 
     // if(!token) {
     // console.log('token smart contract is not located on the current network. Please select another network with Metamask.')

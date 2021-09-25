@@ -40,21 +40,18 @@ function exchange(state = {}, action) {
             return {...state, balancesLoaded: true }  
         case 'DAI_DEPOSIT_AMOUNT_CHANGED':
             return { ...state, daiDepositAmount: action.amount} 
-        case 'DAI_DEPOSIT':
-            return {...state, daiDeposit: action.amount}
-        case 'DAI_WITHDRAW':
-            return {...state, daiWithdraw: action.amount}
+        case 'DAI_WITHDRAW_AMOUNT_CHANGED':
+            return {...state, daiWithdrawAmount: action.amount}
         default:
             return state
     }
 }
 
 
-
-
-
 const rootReducer = combineReducers({
-    web3, token, exchange
+    web3, 
+    token, 
+    exchange
 })
 
 export default rootReducer
