@@ -9,6 +9,8 @@ are in the scripts folder. README.md there will help you with those.
 
 # first 
 `cd clean`
+create a .env file with 
+'INFURA_ID=""
 
 ## If you have truffle and ganache installed start with the following:
 `yarn && yarn run ganache-cli`
